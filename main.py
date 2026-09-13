@@ -53,22 +53,22 @@ benchmark_max_drawdown_date = benchmark_drawdown.idxmin()
 correlation_matrix = daily_return.corr()
 covariance_matrix = daily_return.cov()
 
-covariances_with_spy = {}
+combined_covariance = combined_returns.cov()
 
+covariances_with_spy = {}
 for ticker in asset_tickers:
-    covariance = combined_returns.cov().loc[ticker, 'SPY']
+    covariance = combined_covariance.loc[ticker, 'SPY']
     covariances_with_spy[ticker] = covariance
 
 spy_variance = benchmark_returns.var()
 
 # Beta
+# Beta
 betas = {}
-
 for ticker in asset_tickers:
-    covariance = combined_returns.cov().loc[ticker, 'SPY']
+    covariance = covariances_with_spy[ticker]
     beta = covariance / spy_variance
     betas[ticker] = beta
-    
     
 # Risk Performance
 
