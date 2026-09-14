@@ -10,6 +10,7 @@ from risk import (
     calculate_covariance_with_benchmark,
     calculate_beta
 )
+from statistics import calculate_correlation_matrix
 
 
 data = load_data()
@@ -20,6 +21,7 @@ benchmark = close['SPY']
 
 daily_return = calculate_daily_returns(prices)
 benchmark_return = benchmark.pct_change()
+correlation_matrix = calculate_correlation_matrix(daily_return)
 
 covariance = calculate_covariance_with_benchmark(
     daily_return,
@@ -47,3 +49,4 @@ print(drawdown)
 print(max_drawdown)
 print(covariance)
 print(beta)
+print(correlation_matrix)
